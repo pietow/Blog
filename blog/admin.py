@@ -10,6 +10,10 @@ class PostAdmin(admin.ModelAdmin):
     #generates slug automatically based on the title
     prepopulated_fields = {'slug': ('title',)}
 
+    actions = ['publish_posts']
+
+    def publish_posts(self, request, queryset):
+        queryset.update(status=1)
 
 @admin.register(Comment) #Decorator registers the comment into the Admin area
 class CommentAdmin(admin.ModelAdmin):
