@@ -2,11 +2,11 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-
 STATUS = (
     (0,"Draft"),
     (1,"Publish")
 )
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -16,7 +16,7 @@ class Post(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    photo = models.ImageField(upload_to='posts')
+    photo = models.ImageField(default='logo.png', upload_to='posts')
 
     class Meta:
         ordering = ['-created_on']
@@ -37,3 +37,18 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
+
+class PageDescription(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    title_text = models.CharField(max_length=200, unique=True)
+    text = models.TextField()
+    updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
+    photo = models.ImageField(default='logo.png', upload_to='pageImg')
+
+    def __str__(self):
+        return self.title
+
+class PageHome(PageDescription):
+    author = models.ForeignKey(User, on_delete=models.PROTECT, related_name='blog_pagehome')

@@ -1,10 +1,11 @@
 from django.contrib import admin
 
-from .models import Post, Comment
+from .models import Post, Comment, PageHome
 
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status', 'created_on')
+    list_display = ('title', 'slug', 'status', 'created_on', 'photo')
     list_filter = ('status',)
     search_fields = ['title', 'content']
     #generates slug automatically based on the title
@@ -25,4 +26,18 @@ class CommentAdmin(admin.ModelAdmin):
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
 
-admin.site.register(Post, PostAdmin)
+@admin.register(PageHome)
+class PageHomeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'photo', 'status', 'author', 'created_on')
+    actions = ['publish_posts']
+
+    def publish_posts(self, request, queryset):
+        queryset.update(status=1)
+
+    def has_add_permission(self, request):
+        # if there's already an entry, do not allow adding
+        count = PageHome.objects.all().count()
+        if count == 0:
+            return True
+        return False
+#admin.site.register(Post, PostAdmin)
