@@ -1,15 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from .models import Post
+from .models import Post, PageHome
 from .forms import CommentForm
 
-
-class PostList(generic.ListView):
-    queryset = Post.objects.filter(status=1).order_by('-created_on')
+class HomeDetail(generic.DeleteView):
+    #viewing subset of object (in PageHome)
+    queryset = PageHome.objects.filter(status=1)
     template_name = 'index.html'
-    #pagination
-    paginate_by = 3
+
+
+#class PostList(generic.ListView):
+#    queryset = Post.objects.filter(status=1).order_by('-created_on')
+#    template_name = 'index.html'
+#    #pagination
+#    paginate_by = 3
 
 def post_detail(request, slug):
     template_name = 'post_detail.html'
