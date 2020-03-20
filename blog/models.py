@@ -52,3 +52,17 @@ class PageDescription(models.Model):
 
 class PageHome(PageDescription):
     author = models.ForeignKey(User, on_delete=models.PROTECT, related_name='blog_pagehome')
+
+class Gallery(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_gallery')
+    updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
+    photo = models.ImageField(default='logo.png', upload_to='gallery')
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.title

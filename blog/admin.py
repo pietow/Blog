@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Comment, PageHome
+from .models import Post, Comment, PageHome, Gallery
 
 
 @admin.register(Post)
@@ -40,4 +40,14 @@ class PageHomeAdmin(admin.ModelAdmin):
         if count == 0:
             return True
         return False
+
+@admin.register(Gallery)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'status', 'created_on', 'photo')
+    list_filter = ('status',)
+    search_fields = ['title']
+    actions = ['publish_image']
+
+    def publish_image(self, request, queryset):
+        queryset.update(status=1)
 #admin.site.register(Post, PostAdmin)

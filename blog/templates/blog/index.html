@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
+
     <!-- Hero Section-->
     <section style="background: url({{ pagehome.photo.url }}); background-size: cover; background-position: center center" class="hero">
       <div class="container">
@@ -26,10 +27,12 @@
     <!-- Gallery Section-->
     <section class="gallery no-padding">
       <div class="row">
+          {% for image in gallery_list %}
         <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><a href="{% static 'blog/img/gallery-1.jpg' %}" data-fancybox="gallery" class="image"><img src="{% static 'blog/img/gallery-1.jpg' %}" alt="..." class="img-fluid">
+            <div class="item"><a href="{{ image.photo.url }}" data-fancybox="gallery" class="image"><img src="{{ image.photo.url }}" alt="..." class="img-fluid">
               <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
         </div>
+        {% endfor %}
       </div>
     </section>
 {%endblock%}

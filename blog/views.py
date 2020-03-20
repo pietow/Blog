@@ -1,13 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from .models import Post, PageHome
+from .models import Post, PageHome, Gallery
 from .forms import CommentForm
 
 class HomeDetail(generic.DeleteView):
     #viewing subset of object (in PageHome)
     queryset = PageHome.objects.filter(status=1)
     template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['gallery_list'] = Gallery.objects.filter(status=1)
+        return context
 
 
 #class PostList(generic.ListView):
