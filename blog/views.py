@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from .models import Post, PageHome, Gallery
+from .models import Post, PageHome, PhotoForGallery, Gallery
 from .forms import CommentForm
 
 class HomeDetail(generic.DeleteView):
@@ -13,7 +13,7 @@ class HomeDetail(generic.DeleteView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['gallery_list'] = Gallery.objects.filter(status=1)
+        context['gallery_list'] = PhotoForGallery.objects.all()
         return context
 
 

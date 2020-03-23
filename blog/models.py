@@ -59,10 +59,16 @@ class Gallery(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    photo = models.ImageField(default='logo.png', upload_to='gallery')
+#    photo = models.ImageField(default='logo.png', upload_to='gallery')
 
     class Meta:
         ordering = ['-created_on']
 
     def __str__(self):
         return self.title
+
+class PhotoForGallery(models.Model):
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
+    #ForeignKey auto. generates OneToMany relationship
+    #to access all Photos in a Gallery use Gallery.objects.all()[0].photoforgallery_set.all() 
+    photo = models.ImageField(default='logo.png', upload_to='gallery')
