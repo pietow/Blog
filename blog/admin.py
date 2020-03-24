@@ -41,19 +41,21 @@ class PageHomeAdmin(admin.ModelAdmin):
             return True
         return False
 
+@admin.register(PhotoForGallery)
+class PhotoGalleryAdmin(admin.ModelAdmin):
+    list_display = ('gallery', 'photo')
 
 class PhotoInline(admin.TabularInline):
     model = PhotoForGallery
-    extra = 1
+    extra = 1 #controls the number of extra forms the formset will display in addition to the initial forms. 
     list_display = ('photo')
-    #controls the number of extra forms the formset will display in addition to the initial forms. 
+#    template = "admin/blog/gallery/edit_inline/tabular.html"
 
 #@admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     inlines = [
         PhotoInline,
     ]
-    
 
     list_display = ('title', 'status', 'created_on')
     list_filter = ('status',)
@@ -64,9 +66,12 @@ class GalleryAdmin(admin.ModelAdmin):
         queryset.update(status=1)
 
     def save_model(self, request, obj, form, change):
-        obj.save()
+        super().save_model(request, obj, form, change)
+       # print(obj.photoforgallery_set.get(id=7).photo)
+       # obj.save()
 
-        for afile in request.FILES.getlist('photo_multiple'):
-            obj.photo.create(image=afile)
-        
+        for afile in request.FILES.getlist('photos_multiple'):
+            print(afile)
+            obj.photoforgallery_set.create(photo=afile)
+
 admin.site.register(Gallery, GalleryAdmin)
