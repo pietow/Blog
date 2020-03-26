@@ -12,6 +12,10 @@ class HomeDetail(generic.DeleteView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
+       # querysetGall = Gallery.objects.all()
+       # print(querysetGall)
+       # for i in querysetGall:
+       #     print(type(i.title))
         # Add in a QuerySet of all the books
         context['gallery_list'] = PhotoForGallery.objects.all()
         return context
