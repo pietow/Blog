@@ -13,7 +13,18 @@ class HomeDetail(generic.DeleteView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
+        query = PhotoForGallery.objects.all()
+
+        list_of_lists = []
+        sub_no = int(len(query)/4)
+        rest = len(query) % 4
+        for i in range(sub_no):
+            list_of_lists.append(query[i*4:(i+1)*4])
+        if rest > 0:
+            list_of_lists.append(query[len(query)-rest:])
+
         context['gallery_list'] = PhotoForGallery.objects.all()
+        context['gallery_superlist'] = list_of_lists
         return context
 
 
