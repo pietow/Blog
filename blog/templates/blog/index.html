@@ -2,111 +2,38 @@
 {% block content %}
 {% load static %}
 
-    <!-- Hero Section-->
-    <section style="background: url({{ pagehome.photo.url }}); background-size: cover; background-position: center center" class="hero">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7">
-            <h1>{{ pagehome.title }}</h1><a href="#" class="hero-link">Discover More</a>
-          </div>
-        </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
+<!-- Hero Section-->
+<section style="background: url({{ pagehome.photo.url }}); background-size: cover; background-position: center center" class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <h1>{{ pagehome.title }}</h1><a href="#" class="hero-link">Discover More</a>
       </div>
-    </section>
-    <!-- Intro Section-->
-    <section class="intro">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <h2 class="h3">{{ pagehome.title_text }}</h2>
-            <p class="text-big"> {{ pagehome.text }} </p></div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Gallery Section-->
-    <section class="gallery no-padding">
-      <div class="row">
-          {% for image in gallery_list %}
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-            <div class="item"><a href="{{ image.photo.url }}" data-fancybox="gallery" class="image"><img src="{{ image.photo.url }}" alt="..." class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-        </div>
-        {% endfor %}
-      </div>
-    </section>
-
-<!--Carousel Wrapper-->
-<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-  <!--Controls-->
-  <div class="controler-top">
-
-      <a class="carousel-control-prev" href="#multi-item-example "role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-      </a>
+    </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
   </div>
-  <!--/.Controls-->
-
-
-  <!--Slides-->
-  <div class="carousel-inner" role="listbox">
-
-    <!--First slide-->
-    <div class="carousel-item active">
-
-        <div class="row">
-      <div class="col-3 p-0">
-          <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" data-fancybox="gallery" class="image"><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" alt="..." class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"></div></a>
+</section>
+<!-- Intro Section-->
+<section class="intro">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h2 class="h3">{{ pagehome.title_text }}</h2>
+        <p class="text-big"> {{ pagehome.text }} </p>
       </div>
-
-      <div class="col-3 p-0">
-          <img class="img-fluid"
-            src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
-            alt="Card image cap">
-      </div>
-
-      <div class="col-3 p-0">
-          <img class="img-fluid"
-            src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
-            alt="Card image cap">
-      </div>
-
-      <div class="col-3 p-0">
-          <img class="img-fluid"
-               src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(36).jpg"
-               alt="Card image cap">
-      </div>
-        </div>
     </div>
-    <!--/.First slide-->
-
-    <!--Second slide-->
-    <!--/.Second slide-->
-
-    <!--Third slide-->
-    <div class="carousel-item">
-
-      <div class="row">
-      <div class="col-3 p-0">
-          <img class="img-fluid"
-            src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(53).jpg" alt="Card image cap">
-        </div>
-      </div>
-
-
-    </div>
-    <!--/.Third slide-->
-
   </div>
-  <!--/.Slides-->
+</section>
 
+
+
+
+<div id="owl-1" class="owl-carousel owl-theme custom">
+  {% for image in gallery_list %}
+  <a href="{{ image.photo.url }}" data-fancybox="images">
+    <img src="{{ image.photo.url }}" class="img-fluid" />
+  </a>
+  {% endfor %}
 </div>
-<!--/.Carousel Wrapper-->
+
+
 {%endblock%}
