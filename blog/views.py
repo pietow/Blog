@@ -1,34 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from .models import Post, PageHome, PhotoForGallery, Gallery
+from .models import Post, PageDescription, PhotoForGallery, Gallery
 from .forms import CommentForm
 
+
 class HomeDetail(generic.DeleteView):
-    #viewing subset of object (in PageHome)
-    queryset = PageHome.objects.filter(status=1)
+    # viewing subset of object (in PageHome)
+    queryset = PageDescription.objects.filter(status=1)
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        query = PhotoForGallery.objects.all()
-
-        list_of_lists = []
-        sub_no = int(len(query)/4)
-        rest = len(query) % 4
-        for i in range(sub_no):
-            list_of_lists.append(query[i*4:(i+1)*4])
-        if rest > 0:
-            list_of_lists.append(query[len(query)-rest:])
-
+        # Add in a QuerySet of all the Photos
         context['gallery_list'] = PhotoForGallery.objects.all()
-        context['gallery_superlist'] = list_of_lists
         return context
 
 
-#class PostList(generic.ListView):
+# class PostList(generic.ListView):
 #    queryset = Post.objects.filter(status=1).order_by('-created_on')
 #    template_name = 'index.html'
 #    #pagination

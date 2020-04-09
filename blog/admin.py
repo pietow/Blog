@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Comment, PageHome, Gallery, PhotoForGallery
+from .models import Post, Comment, PageDescription, Gallery, PhotoForGallery
 
 
 @admin.register(Post)
@@ -8,7 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'status', 'created_on', 'photo')
     list_filter = ('status',)
     search_fields = ['title', 'content']
-    #generates slug automatically based on the title
+    # generates slug automatically based on the title
     prepopulated_fields = {'slug': ('title',)}
 
     actions = ['publish_posts']
@@ -16,7 +16,8 @@ class PostAdmin(admin.ModelAdmin):
     def publish_posts(self, request, queryset):
         queryset.update(status=1)
 
-@admin.register(Comment) #Decorator registers the comment into the Admin area
+
+@admin.register(Comment)  # Decorator registers the comment into the Admin area
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'body', 'post', 'created_on', 'active')
     list_filter = ('active', 'created_on')
@@ -26,7 +27,8 @@ class CommentAdmin(admin.ModelAdmin):
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
 
-@admin.register(PageHome)
+
+@admin.register(PageDescription)
 class PageHomeAdmin(admin.ModelAdmin):
     list_display = ('title', 'photo', 'status', 'author', 'created_on')
     actions = ['publish_posts']
@@ -36,22 +38,27 @@ class PageHomeAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         # if there's already an entry, do not allow adding
-        count = PageHome.objects.all().count()
+        count = PageDescription.objects.all().count()
         if count == 0:
             return True
         return False
+
 
 @admin.register(PhotoForGallery)
 class PhotoGalleryAdmin(admin.ModelAdmin):
     list_display = ('gallery', 'photo')
 
+
 class PhotoInline(admin.TabularInline):
     model = PhotoForGallery
-    extra = 1 #controls the number of extra forms the formset will display in addition to the initial forms. 
+    # controls the number of extra forms the formset will display in addition to the initial forms.
+    extra = 1
     list_display = ('photo')
 #    template = "admin/blog/gallery/edit_inline/tabular.html"
 
-#@admin.register(Gallery)
+# @admin.register(Gallery)
+
+
 class GalleryAdmin(admin.ModelAdmin):
     inlines = [
         PhotoInline,
@@ -73,5 +80,6 @@ class GalleryAdmin(admin.ModelAdmin):
         for afile in request.FILES.getlist('photos_multiple'):
             print(afile)
             obj.photoforgallery_set.create(photo=afile)
+
 
 admin.site.register(Gallery, GalleryAdmin)
