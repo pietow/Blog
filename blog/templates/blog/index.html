@@ -3,11 +3,11 @@
 {% load static %}
 
 <!-- Hero Section-->
-<section style="background: url({{ pagehome.photo.url }}); background-size: cover; background-position: center center" class="hero">
+<section style="background: url({{ pagedescription.photo.url }}); background-size: cover; background-position: center center" class="hero">
   <div class="container">
     <div class="row">
       <div class="col-lg-7">
-        <h1>{{ pagehome.title }}</h1><a href="#" class="hero-link">Discover More</a>
+        <h1>{{ pagedescription.title }}</h1><a href="#" class="hero-link">Discover More</a>
       </div>
     </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
   </div>
@@ -17,8 +17,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-        <h2 class="h3">{{ pagehome.title_text }}</h2>
-        <p class="text-big"> {{ pagehome.text }} </p>
+        <h2 class="h3">{{ pagedescription.title_text }}</h2>
+        <p class="text-big"> {{ pagedescription.text }} </p>
       </div>
     </div>
   </div>
@@ -27,9 +27,11 @@
 
 <!-- Gallery Section-->
 
+
 <div id="owl-1" class="owl-carousel owl-theme custom">
   {% for image in gallery_list %}
-  <a href="{{ image.photo.url }}" data-fancybox="images">
+
+  <a href="{{ image.photo.url }}">
     <img src="{{ image.photo.url }}" class="img-fluid" />
   </a>
   {% endfor %}
