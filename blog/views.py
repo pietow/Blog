@@ -17,6 +17,12 @@ class HomeDetail(generic.DetailView):
         context['gallery_list'] = PhotoForGallery.objects.all()
         return context
 
+
+class GalleryList(generic.ListView):
+    queryset = Gallery.objects.all()
+    template_name = 'photo.html'
+    context_object_name = 'gallery_list'
+
 # class PostList(generic.ListView):
 #    queryset = Post.objects.filter(status=1).order_by('-created_on')
 #    template_name = 'index.html'

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+{% for gallery  in gallery_list %}
+<h1>{{gallery.title}}</h1>
+
+<div id="owl-{{forloop.counter}}" class="owl-carousel owl-theme custom">
+  {% for image in gallery.photoforgallery_set.all %}
+  <a href="{{ image.photo.url }}">
+    <img src="{{ image.photo.url }}" />
+  </a>
+  {% endfor %}
+</div>
+
+{% endfor %}
+{%endblock%}
+
