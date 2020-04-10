@@ -30,8 +30,10 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(PageDescription)
 class PageHomeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'photo', 'status', 'author', 'created_on')
+    list_display = ('title', 'slug', 'photo', 'status', 'author', 'created_on')
     actions = ['publish_posts']
+
+    readonly_fields = ('slug',)
 
     def publish_posts(self, request, queryset):
         queryset.update(status=1)
@@ -39,7 +41,7 @@ class PageHomeAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         # if there's already an entry, do not allow adding
         count = PageDescription.objects.all().count()
-        if count == 0:
+        if count < 2:
             return True
         return False
 
