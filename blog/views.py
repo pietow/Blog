@@ -5,9 +5,9 @@ from .models import Post, PageDescription, PhotoForGallery, Gallery
 from .forms import CommentForm
 
 
-class HomeDetail(generic.DeleteView):
+class HomeDetail(generic.DetailView):
     # viewing subset of object (in PageHome)
-    queryset = PageDescription.objects.filter(status=1)
+    queryset = PageDescription.objects.all()
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
@@ -17,12 +17,12 @@ class HomeDetail(generic.DeleteView):
         context['gallery_list'] = PhotoForGallery.objects.all()
         return context
 
-
 # class PostList(generic.ListView):
 #    queryset = Post.objects.filter(status=1).order_by('-created_on')
 #    template_name = 'index.html'
 #    #pagination
 #    paginate_by = 3
+
 
 def post_detail(request, slug):
     template_name = 'post_detail.html'
