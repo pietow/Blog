@@ -69,10 +69,13 @@ class GalleryAdmin(admin.ModelAdmin):
     list_display = ('title', 'status', 'created_on')
     list_filter = ('status',)
     search_fields = ['title']
-    actions = ['publish_image']
+    actions = ['publish_image', 'unpublish_image']
 
     def publish_image(self, request, queryset):
         queryset.update(status=1)
+
+    def unpublish_image(self, request, queryset):
+        queryset.update(status=0)
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
