@@ -19,7 +19,7 @@ class HomeDetail(generic.DetailView):
 
 
 class GalleryList(generic.ListView):
-    queryset = Gallery.objects.all()
+    queryset = Gallery.objects.filter(status=1)
     template_name = 'photo.html'
     context_object_name = 'gallery_list'
 
