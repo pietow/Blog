@@ -1,5 +1,4 @@
-
-# Created by https://www.gitignore.io/api/linux,emacs,django
+.vscode/settings.json
 # Edit at https://www.gitignore.io/?templates=linux,emacs,django
 
 ### Django ###
@@ -28,7 +27,6 @@ media
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
