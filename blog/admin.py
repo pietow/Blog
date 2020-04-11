@@ -31,12 +31,15 @@ class CommentAdmin(admin.ModelAdmin):
 @admin.register(PageDescription)
 class PageHomeAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'photo', 'status', 'author', 'created_on')
-    actions = ['publish_posts']
+    actions = ['publish_home', 'unpublish_home']
+
+    def publish_home(self, request, queryset):
+        queryset.update(status=1)
+
+    def unpublish_home(self, request, queryset):
+        queryset.update(status=0)
 
     readonly_fields = ('slug',)
-
-    def publish_posts(self, request, queryset):
-        queryset.update(status=1)
 
     def has_add_permission(self, request):
         # if there's already an entry, do not allow adding
@@ -48,14 +51,21 @@ class PageHomeAdmin(admin.ModelAdmin):
 
 @admin.register(PhotoForGallery)
 class PhotoGalleryAdmin(admin.ModelAdmin):
-    list_display = ('gallery', 'photo')
+    list_display = ('gallery', 'photo', 'status')
+    actions = ['publish_home', 'unpublish_home']
+
+    def publish_home(self, request, queryset):
+        queryset.update(status=1)
+
+    def unpublish_home(self, request, queryset):
+        queryset.update(status=0)
 
 
 class PhotoInline(admin.TabularInline):
     model = PhotoForGallery
     # controls the number of extra forms the formset will display in addition to the initial forms.
-    extra = 1
-    list_display = ('photo')
+    extra = 0
+    list_display = ('photo', 'status')
 #    template = "admin/blog/gallery/edit_inline/tabular.html"
 
 # @admin.register(Gallery)

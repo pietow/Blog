@@ -14,7 +14,7 @@ class HomeDetail(generic.DetailView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the Photos
-        context['gallery_list'] = PhotoForGallery.objects.all()
+        context['gallery_list'] = PhotoForGallery.objects.filter(status=1)
         return context
 
 

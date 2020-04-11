@@ -1,7 +1,6 @@
 /* your styles go here */
 .owl-carousel .owl-wrapper,
 [class^="owl-item"] {
-  border: solid black;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;

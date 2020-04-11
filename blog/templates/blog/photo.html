@@ -3,7 +3,7 @@
 {% load static %}
 
 {% for gallery  in gallery_list %}
-<h1>{{gallery.title}}</h1>
+<h1 class="text-center pt-5 pb-3">{{gallery.title}}</h1>
 
 <div id="owl-{{forloop.counter}}" class="owl-carousel owl-theme custom">
   {% for image in gallery.photoforgallery_set.all %}

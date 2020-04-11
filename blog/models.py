@@ -78,7 +78,13 @@ class Gallery(models.Model):
 
 
 class PhotoForGallery(models.Model):
+    STATUS2 = (
+        (0, "not in home gallery"),
+        (1, "in home gallery")
+    )
     gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
     # ForeignKey auto. generates OneToMany relationship
     # to access all Photos in a Gallery use Gallery.objects.all()[0].photoforgallery_set.all()
-    photo = models.ImageField(default='logo.png', upload_to='gallery')
+    photo = models.ImageField(
+        default='logo.png', upload_to='gallery', blank=False, null=False)
+    status = models.IntegerField(choices=STATUS2, default=0)
