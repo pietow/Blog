@@ -1,53 +1,38 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block content %}
+{% load static %}
 
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
+    <!-- Hero Section-->
+    <section style="background: url({{ pagehome.photo.url }}); background-size: cover; background-position: center center" class="hero">
+      <div class="container">
         <div class="row">
-            <div class=" col-md-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h3 class=" site-heading my-4 mt-3 text-white"> Welcome to my awesome Blog </h3>
-                    <p class="text-light">We Love Django As much as you do..! &nbsp
-                    </p>
-                </div>
-            </div>
+          <div class="col-lg-7">
+            <h1>{{ pagehome.title }}</h1><a href="#" class="hero-link">Discover More</a>
+          </div>
+        </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
+      </div>
+    </section>
+    <!-- Intro Section-->
+    <section class="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="h3">{{ pagehome.title_text }}</h2>
+            <p class="text-big"> {{ pagehome.text }} </p></div>
         </div>
-    </div>
-</header>
-<div class="container">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-8 mt-3 left">
-            <!-- by default object_list would be also working -->
-            {% for post in post_list %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
-                    <img src="{{ post.photo.url }}">
-                    <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
-                </div>
-            </div>
-            {% endfor %}
+      </div>
+    </section>
+
+
+    <!-- Gallery Section-->
+    <section class="gallery no-padding">
+      <div class="row">
+          {% for image in gallery_list %}
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+            <div class="item"><a href="{{ image.photo.url }}" data-fancybox="gallery" class="image"><img src="{{ image.photo.url }}" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
         </div>
-        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
-    </div>
-
-<!-- Pagination -->
-    {% if is_paginated %}
-    <nav aria-label="Page navigation conatiner"></nav>
-    <ul class="pagination justify-content-center">
-        {% if page_obj.has_previous %}
-        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-        {% endif %}
-        {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-        {% endif %}
-    </ul>
-    </nav>
-</div>
-{% endif %}
-
-</div>
+        {% endfor %}
+      </div>
+    </section>
 {%endblock%}
