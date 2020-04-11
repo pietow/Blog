@@ -23,11 +23,11 @@ class GalleryList(generic.ListView):
     template_name = 'photo.html'
     context_object_name = 'gallery_list'
 
-# class PostList(generic.ListView):
-#    queryset = Post.objects.filter(status=1).order_by('-created_on')
-#    template_name = 'index.html'
-#    #pagination
-#    paginate_by = 3
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'blog.html'
+    #pagination
+    paginate_by = 3
 
 
 def post_detail(request, slug):
