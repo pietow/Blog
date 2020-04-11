@@ -4,6 +4,8 @@ from django.views import generic
 from .models import Post, PageDescription, PhotoForGallery, Gallery
 from .forms import CommentForm
 
+#Home and Zirkuspage
+
 
 class HomeDetail(generic.DetailView):
     # viewing subset of object (in PageHome)
@@ -23,15 +25,16 @@ class GalleryList(generic.ListView):
     template_name = 'photo.html'
     context_object_name = 'gallery_list'
 
+
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'blog.html'
-    #pagination
+    # pagination
     paginate_by = 3
 
 
 def post_detail(request, slug):
-    template_name = 'post_detail.html'
+    template_name = 'post.html'
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(active=True)
     new_comment = None

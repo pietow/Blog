@@ -10,7 +10,7 @@
               <!-- post -->
               {% for post in post_list %}
               <div class="post col-xl-6">
-                <div class="post-thumbnail"><a href="post.html"><img src="{{post.photo.url}}" alt="..." class="img-fluid"></a></div>
+                <div class="post-thumbnail"><a href={% url 'post_detail' post.slug %}><img src="{{post.photo.url}}" alt="..." class="img-fluid"></a></div>
                 <div class="post-details">
                   <div class="post-meta d-flex justify-content-between">
                     <div class="date meta-last">{{post.created_on|date:'d. M'}} | {{post.created_on|date:'Y'}} </div>
