@@ -134,6 +134,37 @@
   <script src="{% static 'blog/js/main.js' %}"></script>
   <script src="{% static 'blog/js/front.js' %}"></script>
   <script src="{% static 'blog/node_modules/owl.carousel2/dist/owl.carousel.min.js' %} "></script>
+  <script >
+  var owl = $('#owl-1');
+  var owl2 = $('#owl-2');
+  var owl3 = $('#owl-3');
+  var owl4 = $('#owl-4');
+  var owl5 = $('#owl-5');
+
+  //Init first Slider Carousel
+  owl.owlCarousel({
+    loop: true,
+    dots: false,
+    nav: true,
+    navText: [
+        '<i class="fa fa-angle-left" aria-hidden="true"></i>   ',
+        '<i class="fa fa-angle-right" aria-hidden="true"></i>   '
+    ],
+    itemClass: 'owl-item',
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 2,
+      },
+      600: {
+        items: 3,
+      },
+      1200: {
+        items: 4,
+      }
+    }
+  });
+  </script>
 
 </body>
 
