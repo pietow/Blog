@@ -81,6 +81,13 @@ class GalleryAdmin(admin.ModelAdmin):
     search_fields = ['title']
     actions = ['publish_image', 'unpublish_image']
 
+    def has_add_permission(self, request):
+        # if there's already an entry, do not allow adding
+        count = Gallery.objects.all().count()
+        if count < 10:
+            return True
+        return False
+
     def publish_image(self, request, queryset):
         queryset.update(status=1)
 

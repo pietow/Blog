@@ -12,6 +12,7 @@
 [class^="owl-item"] {
   position: relative;
   min-height: 1px;
+  max-height: 210px;
   float: left;
   -webkit-backface-visibility: hidden;
   -webkit-tap-highlight-color: transparent;

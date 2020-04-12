@@ -27,31 +27,11 @@
   <link rel="stylesheet" href=" {% static 'blog/css/style.default.css' %} " id="theme-stylesheet">
   <!-- Custom stylesheet - for your changes-->
   <link rel="stylesheet" href=" {% static 'blog/css/custom.css' %} ">
-  <!-- Favicon-->
-  <link rel="shortcut icon" href="favicon.png">
   <!-- Tweaks for older IEs-->
   <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 
-<style>
-    .owl-carousel .owl-wrapper,
-    [class^="owl-item"] {
-    border:none;
-    }
-
-   .owl-carousel .owl-item {
-    position: relative;
-    min-height: 1px;
-    max-height: 200px;}
-
-    .owl-carousel .owl-item2 {
-    position: relative;
-    min-height: 1px;
-    max-height: 200px;}
-
-
-    </style>
 </head>
 
 <body>
@@ -134,37 +114,6 @@
   <script src="{% static 'blog/js/main.js' %}"></script>
   <script src="{% static 'blog/js/front.js' %}"></script>
   <script src="{% static 'blog/node_modules/owl.carousel2/dist/owl.carousel.min.js' %} "></script>
-  <script >
-  var owl = $('#owl-1');
-  var owl2 = $('#owl-2');
-  var owl3 = $('#owl-3');
-  var owl4 = $('#owl-4');
-  var owl5 = $('#owl-5');
-
-  //Init first Slider Carousel
-  owl.owlCarousel({
-    loop: true,
-    dots: false,
-    nav: true,
-    navText: [
-        '<i class="fa fa-angle-left" aria-hidden="true"></i>   ',
-        '<i class="fa fa-angle-right" aria-hidden="true"></i>   '
-    ],
-    itemClass: 'owl-item',
-    responsiveClass: true,
-    responsive: {
-      0: {
-        items: 2,
-      },
-      600: {
-        items: 3,
-      },
-      1200: {
-        items: 4,
-      }
-    }
-  });
-  </script>
 
 </body>
 
