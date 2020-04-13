@@ -48,6 +48,9 @@ class PageHomeAdmin(admin.ModelAdmin):
             return True
         return False
 
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(PhotoForGallery)
 class PhotoGalleryAdmin(admin.ModelAdmin):
